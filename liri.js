@@ -41,14 +41,15 @@ if (userInput === "movie-this") {
         {
             type: "input",
             message: "Enter the name a movie",
-            name: "movie"
+            name: "movie",
+            default: "Mr. Nobody"
         },
     ]).then(function (inquirerResponse) {
         var queryURL = "http://www.omdbapi.com/?t=" + inquirerResponse.movie + "&y=&plot=short&apikey=40e9cece";
 
         request(queryURL, function (error, response, body) {
             if (JSON.parse(body).Response === "False") {
-                console.log("If you haven't watched Mr. Nobody, then you should: http://www.imdb.com/title/tt0485947/" + "\nIt's on Netflix!")
+                console.log("Sorry the movie you entered does not exist");
             } else {
                 console.log("Title: " + JSON.parse(body).Title + "\nYear of release: " + JSON.parse(body).Year + "\nIMDB Rating: " + JSON.parse(body).imdbRating + "\nRotten Tomatoes: " + JSON.parse(body).Ratings[1].Value + "\nMovie was produced in: " + JSON.parse(body).Country + "\nLanguage: " + JSON.parse(body).Language + "\nPlot: " + JSON.parse(body).Plot + "\nActors: " + JSON.parse(body).Actors);
             }
